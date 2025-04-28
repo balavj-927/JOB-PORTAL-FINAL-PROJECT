@@ -17,8 +17,8 @@ const Navbar = () => {
                 <div className='flex items-center'>
                     <img 
                         onClick={() => navigate('/')} 
-                        className='h-8 transition-transform duration-300 cursor-pointer hover:scale-105' 
-                        src={assets.logo} 
+                        className='transition-transform duration-300 cursor-pointer h-14 hover:scale-105' 
+                        src={assets.logoo} 
                         alt="Job Portal Logo" 
                     />
                 </div>
