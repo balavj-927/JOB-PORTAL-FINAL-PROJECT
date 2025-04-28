@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useCallback } from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import axios from 'axios'
@@ -8,9 +8,21 @@ import Loading from '../components/Loading'
 const ViewApplications = () => {
   const { backendUrl, companyToken } = useContext(AppContext)
   const [applicants, setApplicants] = useState(false)
+  const [openDropdownId, setOpenDropdownId] = useState(null)
 
-  // Function to fetch company Job Applications data 
-  const fetchCompanyJobApplications = async () => {
+  // Function to toggle dropdown visibility
+  const toggleDropdown = (id, e) => {
+    e.stopPropagation() // Prevent triggering document click
+    if (openDropdownId === id) {
+      setOpenDropdownId(null) // close if already open
+    } else {
+      setOpenDropdownId(id) // open this dropdown
+    }
+  }
+
+  // Function to fetch company Job Applications data
+  // Use useCallback to memoize the function so it can be safely used in dependency arrays
+  const fetchCompanyJobApplications = useCallback(async () => {
     try {
       const { data } = await axios.get(backendUrl + '/api/company/applicants',
         { headers: { token: companyToken } }
@@ -24,10 +36,11 @@ const ViewApplications = () => {
     } catch (error) {
       toast.error(error.message)
     }
-  }
+  }, [backendUrl, companyToken])
 
   // Function to Update Job Applications Status 
-  const changeJobApplicationStatus = async (id, status) => {
+  const changeJobApplicationStatus = async (id, status, e) => {
+    if (e) e.stopPropagation()
     try {
       const { data } = await axios.post(backendUrl + '/api/company/change-status',
         { id, status },
@@ -35,6 +48,7 @@ const ViewApplications = () => {
       )
 
       if (data.success) {
+        setOpenDropdownId(null) // Close dropdown after action
         fetchCompanyJobApplications()
       } else {
         toast.error(data.message)
@@ -44,11 +58,24 @@ const ViewApplications = () => {
     }
   }
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setOpenDropdownId(null)
+    }
+    
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
+  // Fixed with proper dependency
   useEffect(() => {
     if (companyToken) {
       fetchCompanyJobApplications()
     }
-  }, [companyToken])
+  }, [companyToken, fetchCompanyJobApplications])
 
   if (!applicants) return <Loading />
 
@@ -128,33 +155,38 @@ const ViewApplications = () => {
                   </td>
                   <td className='px-6 py-4 border-b border-purple-100'>
                     {applicant.status === "Pending" ? (
-                      <div className='relative z-10 inline-block text-left group'>
-                        <button className='flex items-center justify-center w-24 py-2 font-medium text-yellow-800 transition-colors bg-yellow-100 rounded-full hover:bg-yellow-200'>
+                      <div className='relative inline-block text-left'>
+                        <button 
+                          onClick={(e) => toggleDropdown(applicant._id, e)}
+                          className='flex items-center justify-center w-24 py-2 font-medium text-yellow-800 transition-colors bg-yellow-100 rounded-full hover:bg-yellow-200'
+                        >
                           <span>Pending</span>
                           <svg className="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
                         </button>
-                        <div className='absolute right-0 z-20 hidden w-40 mt-2 bg-white border border-purple-100 rounded-lg shadow-xl group-hover:block'>
-                          <button 
-                            onClick={() => changeJobApplicationStatus(applicant._id, 'Accepted')} 
-                            className='flex items-center w-full px-4 py-3 text-left text-green-600 transition-colors rounded-t-lg hover:bg-green-50'
-                          >
-                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                            Accept
-                          </button>
-                          <button 
-                            onClick={() => changeJobApplicationStatus(applicant._id, 'Rejected')} 
-                            className='flex items-center w-full px-4 py-3 text-left text-red-600 transition-colors rounded-b-lg hover:bg-red-50'
-                          >
-                            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                            Reject
-                          </button>
-                        </div>
+                        {openDropdownId === applicant._id && (
+                          <div className='absolute right-0 z-50 w-40 mt-2 bg-white border border-purple-100 rounded-lg shadow-xl'>
+                            <button 
+                              onClick={(e) => changeJobApplicationStatus(applicant._id, 'Accepted', e)} 
+                              className='flex items-center w-full px-4 py-3 text-left text-green-600 transition-colors rounded-t-lg hover:bg-green-50'
+                            >
+                              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                              Accept
+                            </button>
+                            <button 
+                              onClick={(e) => changeJobApplicationStatus(applicant._id, 'Rejected', e)} 
+                              className='flex items-center w-full px-4 py-3 text-left text-red-600 transition-colors rounded-b-lg hover:bg-red-50'
+                            >
+                              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                              </svg>
+                              Reject
+                            </button>
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <div className={`py-2 px-4 rounded-full inline-block font-medium ${
