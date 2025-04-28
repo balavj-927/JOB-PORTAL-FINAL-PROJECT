@@ -56,7 +56,7 @@ const Footer = () => {
         
         {/* Copyright Bottom Bar */}
         <div className="flex flex-col items-center justify-between text-center sm:flex-row sm:text-left">
-          <p className="text-sm text-gray-500">Copyright © {new Date().getFullYear()} NeuroNexus.jobs | All rights reserved.</p>
+          <p className="text-sm text-gray-500">Copyright © {new Date().getFullYear()} CareerCrest.jobs | All rights reserved.</p>
           <div className="flex gap-4 mt-3 sm:mt-0">
             <a href="#" className="text-xs text-gray-500 transition-colors hover:text-blue-600">Privacy Policy</a>
             <a href="#" className="text-xs text-gray-500 transition-colors hover:text-blue-600">Terms of Use</a>
