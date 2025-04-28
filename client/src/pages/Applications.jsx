@@ -212,7 +212,7 @@ const Applications = () => {
                         >
                           <td className='flex items-center gap-3 px-4 py-4 border-b'>
                             <div className="flex items-center justify-center w-12 h-12 overflow-hidden transition-all duration-300 rounded-lg shadow-sm bg-gradient-to-br from-purple-100 to-indigo-100 group-hover:shadow-md">
-                              <img className='object-cover w-8 h-8' src={job.companyId.image} alt={job.companyId.name} />
+                              <img className='w-8 h-8 ' src={job.companyId.image} alt={job.companyId.name} />
                             </div>
                             <span className="font-medium text-gray-800">{job.companyId.name}</span>
                           </td>
