@@ -33,7 +33,7 @@ const Hero = () => {
                         Explore <span className='text-yellow-300'>20,000+</span> Dream Jobs That Inspire
                     </h2>
                     <p className='max-w-2xl px-5 mx-auto mb-10 text-base font-light md:text-lg'>
-                        Your Career Breakthrough Begins at NeuroNexus — Where Top Talent Meets Life-Changing Opportunities!
+                        Your Career Breakthrough Begins at CareerCrest — Where Top Talent Meets Life-Changing Opportunities!
                     </p>
                     
                     {/* Search Box */}
