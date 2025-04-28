@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start">
           {/* Logo and Tagline Column */}
           <div className="flex flex-col items-center md:items-start">
-            <img className="object-contain h-16 transition-all duration-300 hover:opacity-90" src={assets.logoo} alt="Company Logo" />
+            <img className="object-contain h-16 transition-all duration-300 hover:opacity-90" src={assets.logo} alt="Company Logo" />
             <p className="max-w-xs mt-3 text-sm text-gray-600">Connecting top talent with innovative companies worldwide</p>
           </div>
           
