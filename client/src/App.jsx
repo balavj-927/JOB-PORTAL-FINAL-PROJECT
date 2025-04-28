@@ -14,11 +14,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
-
   const { showRecruiterLogin, companyToken } = useContext(AppContext)
 
   return (
-    <div>
+    <div className="min-h-screen bg-white">
       {showRecruiterLogin && <RecruiterLogin />}
       <ToastContainer />
       <Routes>
