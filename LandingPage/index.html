@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Innovative Digital Solutions</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1a365d",
+                        secondary: "#2c5282",
+                        dark: {
+                            primary: "#1a365d",
+                            secondary: "#2c5282",
+                        },
+                        light: {
+                            primary: "#FFFFFF",
+                            secondary: "#F9FAFB",
+                        },
+                    },
+                    borderRadius: {
+                        none: "0px",
+                        sm: "4px",
+                        DEFAULT: "8px",
+                        md: "12px",
+                        lg: "16px",
+                        xl: "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        full: "9999px",
+                        button: "8px",
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+         :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+        
+        body {
+            font-family: "Roboto Slab", serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease;
+        }
+        
+         :root {
+            --background: #ffffff;
+            --text: #1d1e24;
+            --border: #e5e7eb;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --input-bg: #f3f4f6;
+        }
+        
+        [data-theme="dark"] {
+            --background: #0f0b1e;
+            --text: #ffffff;
+            --border: #2a2c39;
+            --card-bg: #1a1630;
+            --nav-bg: rgba(26, 22, 48, 0.9);
+            --input-bg: #241d42;
+        }
+        
+        .theme-transition {
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #1a365d, #2c5282, #2d3748);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradientText 4s linear infinite;
+        }
+        
+        @keyframes gradientText {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient( 135deg, rgba(26, 54, 93, 0.9), rgba(44, 82, 130, 0.8), rgba(45, 55, 72, 0.7));
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #0066ff, #6600ff);
+            border-radius: 10px;
+        }
+        
+        .wave-divider {
+            position: relative;
+            height: 70px;
+            overflow: hidden;
+        }
+        
+        .wave-divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 10px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%230066FF" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%236600FF" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23FF6B6B" opacity=".75"/></svg>') repeat-x;
+            background-size: 1200px 120px;
+            animation: wave 10s linear infinite;
+        }
+        
+        @keyframes wave {
+            0% {
+                background-position-x: 0;
+            }
+            100% {
+                background-position-x: 1200px;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 102, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 102, 255, 0);
+            }
+        }
+        
+        .neon-effect {
+            box-shadow: 0 0 10px #0066ff, 0 0 20px #0066ff, 0 0 30px #0066ff;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 1s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 1s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        
+        input:checked+.toggle-slider {
+            background-color: #0066ff;
+        }
+        
+        input:checked+.toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .checkmark {
+            height: 20px;
+            width: 20px;
+            background-color: #eee;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .custom-checkbox:hover input~.checkmark {
+            background-color: #ccc;
+        }
+        
+        .custom-checkbox input:checked~.checkmark {
+            background-color: #0066ff;
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .custom-checkbox input:checked~.checkmark:after {
+            display: block;
+        }
+        
+        .custom-radio {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .custom-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .radio-mark {
+            height: 20px;
+            width: 20px;
+            background-color: #eee;
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .custom-radio:hover input~.radio-mark {
+            background-color: #ccc;
+        }
+        
+        .custom-radio input:checked~.radio-mark {
+            background-color: #0066ff;
+        }
+        
+        .radio-mark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 6px;
+            left: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+        
+        .custom-radio input:checked~.radio-mark:after {
+            display: block;
+        }
+        
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #eee;
+            outline: none;
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0066ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .range-slider::-webkit-slider-thumb:hover {
+            box-shadow: 0 0 0 5px rgba(0, 102, 255, 0.2);
+        }
+        
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: particleAnimation 15s infinite linear;
+        }
+        
+        @keyframes particleAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="custom-scrollbar theme-transition" style="background: var(--background); color: var(--text)">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-[#0A2647] shadow-md" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold font-['Roboto_Slab'] text-white">NeuroNexus</span
+            >
+          </a>
+          <div class="hidden md:flex items-center space-x-10">
+            <a
+              href="#features"
+              class="text-white hover:text-gray-200 transition-colors duration-300 relative group"
+            >
+              Features
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"
+              ></span>
+                </a>
+                <a href="#services" class="text-white hover:text-gray-200 transition-colors duration-300 relative group">
+              Services
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+                <a href="#testimonials" class="text-white hover:text-gray-200 transition-colors duration-300 relative group">
+              Testimonials
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+                <a href="#contact" class="text-white hover:text-gray-200 transition-colors duration-300 relative group">
+              Contact
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <label class="toggle-switch">
+              <input type="checkbox" id="theme-toggle" />
+              <span class="toggle-slider"></span>
+            </label>
+                <button class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">
+              Get Started
+            </button>
+                <div class="md:hidden w-10 h-10 flex items-center justify-center cursor-pointer" id="mobile-menu-button">
+                    <i class="ri-menu-line ri-lg"></i>
+                </div>
+            </div>
+        </div>
+        <div class="md:hidden hidden mt-4 pb-4" id="mobile-menu">
+            <a href="#features" class="block py-2 text-gray-800 hover:text-primary transition-colors duration-300">Features</a
+          >
+          <a
+            href="#services"
+            class="block py-2 text-gray-800 hover:text-primary transition-colors duration-300"
+            >Services</a
+          >
+          <a
+            href="#testimonials"
+            class="block py-2 text-gray-800 hover:text-primary transition-colors duration-300"
+            >Testimonials</a
+          >
+          <a
+            href="#contact"
+            class="block py-2 text-gray-800 hover:text-primary transition-colors duration-300"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+    <section
+      class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      style="
+        background-image: url('https://readdy.ai/api/search-image?query=A%20modern%20corporate%20office%20environment%20with%20sleek%20architecture%20and%20navy%20blue%20color%20scheme.%20The%20scene%20features%20clean%20lines%2C%20glass%20walls%2C%20and%20subtle%20lighting%20that%20creates%20a%20professional%20atmosphere.%20The%20space%20includes%20contemporary%20furniture%20and%20technology%20elements%2C%20with%20natural%20light%20casting%20elegant%20shadows.%20The%20overall%20aesthetic%20is%20sophisticated%2C%20minimalist%2C%20and%20business-focused%2C%20perfect%20for%20a%20hero%20section%20background&width=1920&height=1080&seq=12355&orientation=landscape');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#0A2647]/90 via-[#144272]/80 to-[#205295]/70"
+      ></div>
+      <div class="particles" id="particles"></div>
+      <div class="container mx-auto px-6 py-16 relative z-10">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="w-full md:w-1/2 text-center md:text-left mb-12 md:mb-0">
+            <h1
+              class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+            >
+              Transform Your Digital
+              <span class="text-[#2B84EA]">Experience</span>
+            </h1>
+            <p class="text-xl text-white/90 mb-8 max-w-lg">
+              Elevate your online presence with our cutting-edge solutions. We
+              blend innovation with design to create experiences that captivate
+              and convert.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
+            >
+              <button
+                class="bg-[#2B84EA] text-white px-8 py-3 !rounded-button font-medium hover:bg-[#2B84EA]/90 transition-all duration-300 pulse whitespace-nowrap"
+              >
+                Get Started
+              </button>
+              <button
+                class="bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 py-3 !rounded-button font-medium hover:bg-white/20 transition-all duration-300 whitespace-nowrap"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 relative">
+            <div class="floating relative z-10">
+              <img
+                src="https://readdy.ai/api/search-image?query=Futuristic%20digital%20interface%20with%20holographic%20displays%20and%20glowing%20blue%20and%20purple%20elements%2C%20floating%20in%20a%20dark%20space%20with%20particle%20effects%2C%203D%20rendering%20with%20high%20detail%20and%20dramatic%20lighting%2C%20sci-fi%20technology%20concept&width=600&height=500&seq=hero-image-1&orientation=landscape"
+                alt="Digital Innovation"
+                class="mx-auto rounded-xl shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="features" class="py-20 bg-[#0A2647] text-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4 text-white">Powerful Features</h2>
+          <p class="text-gray-300 max-w-2xl mx-auto">
+            Our platform offers cutting-edge capabilities designed to elevate
+            your digital presence and streamline your workflow.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div
+            class="bg-[#144272] rounded-lg p-8 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+          >
+            <div
+              class="w-16 h-16 flex items-center justify-center bg-white/10 rounded-full mb-6"
+            >
+              <i class="ri-rocket-line ri-xl text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-white">
+              Lightning Fast Performance
+            </h3>
+            <p class="text-white/80 mb-6">
+              Experience unparalleled speed with our optimized infrastructure,
+              delivering content in milliseconds.
+            </p>
+            <a
+              href="#"
+              class="text-white font-medium flex items-center hover:text-white/80"
+            >
+              Learn more
+              <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+        </div>
+        <div class="bg-[#144272] rounded-lg p-8 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div class="w-16 h-16 flex items-center justify-center bg-white/10 rounded-full mb-6">
+                <i class="ri-shield-check-line ri-xl text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-white">
+                Enterprise-Grade Security
+            </h3>
+            <p class="text-white/80 mb-6">
+                Rest easy knowing your data is protected by industry-leading security protocols and encryption.
+            </p>
+            <a href="#" class="text-white font-medium flex items-center hover:text-white/80">
+              Learn more
+              <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+        </div>
+        <div class="bg-[#144272] rounded-lg p-8 shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div class="w-16 h-16 flex items-center justify-center bg-white/10 rounded-full mb-6">
+                <i class="ri-brush-line ri-xl text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-white">Intuitive Design</h3>
+            <p class="text-white/80 mb-6">
+                Our user-friendly interface makes navigation seamless, ensuring a delightful user experience.
+            </p>
+            <a href="#" class="text-white font-medium flex items-center hover:text-white/80">
+              Learn more
+              <i class="ri-arrow-right-line ml-2"></i>
+            </a>
+        </div>
+        </div>
+        </div>
+        </section>
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4">Our Services</h2>
+                    <p class="text-[var(--text-secondary)] max-w-2xl mx-auto">
+                        Comprehensive solutions tailored to meet your business needs and drive exceptional results.
+                    </p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center mb-20">
+                    <div class="w-full md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                        <h3 class="text-3xl font-bold mb-4">Web Development</h3>
+                        <p class="text-[var(--text-secondary)] mb-6">
+                            We create stunning, responsive websites that not only look beautiful but also perform exceptionally well. Our development team focuses on creating seamless user experiences that drive conversions.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>Custom website design and development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>E-commerce solutions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>Progressive Web Applications (PWAs)</span>
+                            </li>
+                        </ul>
+                        <button class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap transform hover:scale-105 hover:shadow-lg">
+              Learn More
+            </button>
+                    </div>
+                    <div class="w-full md:w-1/2 transform transition-all duration-300 hover:scale-105">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20workspace%20with%20a%20modern%20computer%20setup%20showing%20web%20development%20in%20progress.%20The%20screen%20displays%20clean%20code%20and%20a%20beautiful%20website%20design.%20The%20workspace%20has%20a%20minimalist%20aesthetic%20with%20subtle%20blue%20and%20purple%20accents.%20The%20image%20conveys%20professionalism%2C%20creativity%2C%20and%20technical%20expertise.%20The%20lighting%20is%20soft%20and%20the%20overall%20mood%20is%20productive%20and%20inspiring&width=600&height=400&seq=12346&orientation=landscape"
+                            alt="Web Development" class="rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row-reverse items-center mb-20">
+                    <div class="w-full md:w-1/2 mb-10 md:mb-0 md:pl-10">
+                        <h3 class="text-3xl font-bold mb-4">Digital Marketing</h3>
+                        <p class="text-white/80 mb-6">
+                            Boost your online presence with our comprehensive digital marketing strategies. We help you reach your target audience and achieve measurable results.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>Search Engine Optimization (SEO)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>Social Media Marketing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>Pay-Per-Click (PPC) Advertising</span>
+                            </li>
+                        </ul>
+                        <button class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap transform hover:scale-105 hover:shadow-lg">
+              Learn More
+            </button>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <img src="https://readdy.ai/api/search-image?query=A%20modern%20digital%20marketing%20workspace%20with%20analytics%20dashboards%20and%20social%20media%20metrics%20displayed%20on%20multiple%20screens.%20The%20scene%20includes%20charts%20showing%20growth%20trends%20and%20campaign%20performance.%20The%20color%20scheme%20includes%20subtle%20blues%20and%20purples%20with%20professional%20lighting.%20The%20image%20conveys%20data-driven%20marketing%20strategy%2C%20analytics%20expertise%2C%20and%20digital%20campaign%20management.%20The%20overall%20aesthetic%20is%20clean%2C%20professional%2C%20and%20high-tech&width=600&height=400&seq=12347&orientation=landscape"
+                            alt="Digital Marketing" class="rounded-lg shadow-xl" />
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="w-full md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                        <h3 class="text-3xl font-bold mb-4">UI/UX Design</h3>
+                        <p class="text-white/80 mb-6">
+                            We create intuitive and engaging user experiences that keep your customers coming back. Our design process is centered around user needs and business goals.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>User Research and Testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>Wireframing and Prototyping</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                    <i class="ri-check-line"></i>
+                                </div>
+                                <span>Visual Design and Branding</span>
+                            </li>
+                        </ul>
+                        <button class="bg-primary text-white px-6 py-3 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap transform hover:scale-105 hover:shadow-lg">
+              Learn More
+            </button>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <img src="https://readdy.ai/api/search-image?query=A%20creative%20UI%2FUX%20design%20workspace%20with%20wireframes%2C%20prototypes%2C%20and%20color%20palettes%20visible%20on%20screens%20and%20design%20boards.%20The%20scene%20includes%20design%20tools%20and%20sketches%20showing%20the%20user%20interface%20design%20process.%20The%20color%20scheme%20features%20subtle%20blues%20and%20purples%20with%20professional%20lighting.%20The%20image%20conveys%20creativity%2C%20attention%20to%20detail%2C%20and%20user-centered%20design%20methodology.%20The%20overall%20aesthetic%20is%20modern%2C%20artistic%2C%20and%20professional&width=600&height=400&seq=12348&orientation=landscape"
+                            alt="UI/UX Design" class="rounded-lg shadow-xl" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-20" style="background: var(--background)">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4">Our Impact</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        We've helped businesses achieve remarkable results through our innovative solutions.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl font-bold text-primary mb-2" id="stat1">0</div>
+                        <p class="text-gray-600">Happy Clients</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl font-bold text-primary mb-2" id="stat2">0</div>
+                        <p class="text-gray-600">Projects Completed</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl font-bold text-primary mb-2" id="stat3">0</div>
+                        <p class="text-gray-600">Hours Saved</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <div class="text-4xl font-bold text-primary mb-2" id="stat4">0</div>
+                        <p class="text-gray-600">Awards Won</p>
+                    </div>
+                </div>
+                <div class="mt-16">
+                    <div id="growth-chart" class="w-full h-80 bg-white rounded-lg shadow-lg p-4"></div>
+                </div>
+            </div>
+        </section>
+        <section id="testimonials" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4">What Our Clients Say</h2>
+                    <p class="text-white max-w-2xl mx-auto">
+                        Don't just take our word for it. Hear from our satisfied clients about their experience working with us.
+                    </p>
+                </div>
+                <div class="relative">
+                    <div class="flex overflow-x-auto pb-8 snap-x snap-mandatory" id="testimonial-slider">
+                        <div class="min-w-full md:min-w-[33.333%] px-4 snap-start">
+                            <div class="bg-white p-8 rounded-lg shadow-lg h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                                <div class="flex items-center mb-4">
+                                    <div class="text-yellow-400 flex">
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                </div>
+                                <p class="text-white mb-6">
+                                    "Working with this team has been a game-changer for our business. Their attention to detail and commitment to excellence is unmatched. They delivered our project ahead of schedule and exceeded all expectations."
+                                </p>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                                        <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20smiling%20business%20woman%20with%20short%20dark%20hair%20in%20a%20business%20suit%20against%20a%20neutral%20background.%20The%20image%20is%20well-lit%20with%20soft%20professional%20lighting.%20The%20portrait%20has%20a%20clean%2C%20corporate%20look%20suitable%20for%20a%20testimonial&width=100&height=100&seq=12349&orientation=squarish"
+                                            alt="Emily Richardson" class="w-full h-full object-cover" />
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Emily Richardson</h4>
+                                        <p class="text-gray-600 text-sm">CEO, TechVision Inc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="min-w-full md:min-w-[33.333%] px-4 snap-start">
+                            <div class="bg-white p-8 rounded-lg shadow-lg h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                                <div class="flex items-center mb-4">
+                                    <div class="text-yellow-400 flex">
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 mb-6">
+                                    "The level of creativity and technical expertise this team brings to the table is impressive. They transformed our outdated website into a modern, user-friendly platform that has significantly increased our conversion rates."
+                                </p>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                                        <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20smiling%20middle-aged%20business%20man%20with%20glasses%20wearing%20a%20business%20suit%20against%20a%20neutral%20background.%20The%20image%20is%20well-lit%20with%20soft%20professional%20lighting.%20The%20portrait%20has%20a%20clean%2C%20corporate%20look%20suitable%20for%20a%20testimonial&width=100&height=100&seq=12350&orientation=squarish"
+                                            alt="Michael Thompson" class="w-full h-full object-cover" />
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Michael Thompson</h4>
+                                        <p class="text-gray-600 text-sm">
+                                            Marketing Director, Global Solutions
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Testimonial 3 -->
+                        <div class="min-w-full md:min-w-[33.333%] px-4 snap-start">
+                            <div class="bg-white p-8 rounded-lg shadow-lg h-full transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                                <div class="flex items-center mb-4">
+                                    <div class="text-yellow-400 flex">
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-half-fill"></i>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 mb-6">
+                                    "I've worked with many digital agencies over the years, but none have delivered results like this team. Their strategic approach to our digital marketing campaign resulted in a 200% increase in qualified leads within just three months."
+                                </p>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden mr-4">
+                                        <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20smiling%20young%20business%20woman%20with%20long%20blonde%20hair%20wearing%20a%20professional%20outfit%20against%20a%20neutral%20background.%20The%20image%20is%20well-lit%20with%20soft%20professional%20lighting.%20The%20portrait%20has%20a%20clean%2C%20corporate%20look%20suitable%20for%20a%20testimonial&width=100&height=100&seq=12351&orientation=squarish"
+                                            alt="Sophia Martinez" class="w-full h-full object-cover" />
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Sophia Martinez</h4>
+                                        <p class="text-gray-600 text-sm">
+                                            Founder, Innovate Startup
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <button class="w-3 h-3 rounded-full bg-gray-300 mx-1 testimonial-dot active" data-index="0"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 mx-1 testimonial-dot" data-index="1"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 mx-1 testimonial-dot" data-index="2"></button>
+                    </div>
+                </div>
+                <div class="mt-16 py-10 px-8 bg-gray-50 rounded-lg">
+                    <div class="flex flex-wrap justify-center items-center">
+                        <div class="w-1/2 md:w-1/4 p-4 flex justify-center">
+                            <div class="w-10 h-10 flex items-center justify-center text-gray-500">
+                                <i class="ri-microsoft-fill ri-2x"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700 font-medium">Microsoft</span>
+                        </div>
+                        <div class="w-1/2 md:w-1/4 p-4 flex justify-center">
+                            <div class="w-10 h-10 flex items-center justify-center text-gray-500">
+                                <i class="ri-google-fill ri-2x"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700 font-medium">Google</span>
+                        </div>
+                        <div class="w-1/2 md:w-1/4 p-4 flex justify-center">
+                            <div class="w-10 h-10 flex items-center justify-center text-gray-500">
+                                <i class="ri-amazon-fill ri-2x"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700 font-medium">Amazon</span>
+                        </div>
+                        <div class="w-1/2 md:w-1/4 p-4 flex justify-center">
+                            <div class="w-10 h-10 flex items-center justify-center text-gray-500">
+                                <i class="ri-netflix-fill ri-2x"></i>
+                            </div>
+                            <span class="ml-2 text-gray-700 font-medium">Netflix</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-20" style="background: var(--background)">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+                    <p class="text-white max-w-2xl mx-auto">
+                        Choose the plan that works best for your business needs.
+                    </p>
+                    <div class="flex justify-center mt-8">
+                        <div class="bg-white rounded-full p-1 inline-flex">
+                            <button class="px-6 py-2 rounded-full bg-primary text-white pricing-toggle active whitespace-nowrap" data-period="monthly">
+                Monthly
+              </button>
+                            <button class="px-6 py-2 rounded-full text-white pricing-toggle whitespace-nowrap" data-period="yearly">
+                Yearly
+              </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Basic Plan -->
+                    <div style="background: var(--card-bg)" class="rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4">Basic</h3>
+                            <div class="flex items-end mb-6">
+                                <span class="text-4xl font-bold" id="basic-price">$29</span>
+                                <span class="text-white ml-2" id="basic-period">/month</span>
+                            </div>
+                            <p class="text-white mb-6">
+                                Perfect for small businesses and startups.
+                            </p>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                        <i class="ri-check-line"></i>
+                                    </div>
+                                    <span>5 Projects</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                        <i class="ri-check-line"></i>
+                                    </div>
+                                    <span>20GB Storage</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                        <i class="ri-check-line"></i>
+                                    </div>
+                                    <span>Basic Support</span>
+                                </li>
+                                <li class="flex items-start text-gray-400">
+                                    <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                        <i class="ri-close-line"></i>
+                                    </div>
+                                    <span>Advanced Analytics</span>
+                                </li>
+                                <li class="flex items-start text-gray-400">
+                                    <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                        <i class="ri-close-line"></i>
+                                    </div>
+                                    <span>Custom Integrations</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="px-8 pb-8">
+                            <button class="w-full bg-gray-100 text-gray-800 py-3 !rounded-button hover:bg-gray-200 transition-all duration-300 whitespace-nowrap">
+                Get Started
+              </button>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform scale-105 relative">
+                        <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 !rounded-button">
+                            Popular
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4 text-[#0A2647]">Pro</h3>
+                            <div class="flex items-end mb-6">
+                                <span class="text-4xl font-bold text-[#0A2647]" id="pro-price">$79</span
+                >
+                <span class="text-[#0A2647]/70 ml-2" id="pro-period"
+                  >/month</span
+                >
+              </div>
+              <p class="text-[#0A2647]/70 mb-6">
+                Ideal for growing businesses and teams.
+              </p>
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start">
+                  <div
+                    class="w-6 h-6 flex items-center justify-center text-primary mr-2"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span class="text-[#0A2647]">15 Projects</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                        <i class="ri-check-line"></i>
+                                    </div>
+                                    <span class="text-[#0A2647]">50GB Storage</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                        <i class="ri-check-line"></i>
+                                    </div>
+                                    <span class="text-[#0A2647]">Priority Support</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+                                        <i class="ri-check-line"></i>
+                                    </div>
+                                    <span class="text-[#0A2647]">Advanced Analytics</span>
+                                </li>
+                                <li class="flex items-start text-gray-400">
+                                    <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                        <i class="ri-close-line"></i>
+                                    </div>
+                                    <span>Custom Integrations</span>
+                                </li>
+                                </ul>
+                            </div>
+                            <div class="px-8 pb-8">
+                                <button class="w-full bg-primary text-white py-3 !rounded-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">
+                Get Started
+              </button>
+                            </div>
+                        </div>
+                        <div style="background: var(--card-bg)" class="rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                            <div class="p-8">
+                                <h3 class="text-2xl font-bold mb-4">Enterprise</h3>
+                                <div class="flex items-end mb-6">
+                                    <span class="text-4xl font-bold" id="enterprise-price">$199</span
+                >
+                <span class="text-white ml-2" id="enterprise-period"
+                  >/month</span
+                >
+              </div>
+              <p class="text-gray-600 mb-6">
+                For large organizations with complex needs.
+              </p>
+              <ul class="space-y-3 mb-8">
+                <li class="flex items-start">
+                  <div
+                    class="w-6 h-6 flex items-center justify-center text-white mr-2"
+                  >
+                    <i class="ri-check-line"></i>
+                  </div>
+                  <span>Unlimited Projects</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                        <span>200GB Storage</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                        <span>24/7 Dedicated Support</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                        <span class="text-[#ffffff]">Advanced Analytics</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-6 h-6 flex items-center justify-center text-white mr-2">
+                                            <i class="ri-check-line"></i>
+                                        </div>
+                                        <span>Custom Integrations</span>
+                                    </li>
+                                    </ul>
+                                </div>
+                                <div class="px-8 pb-8">
+                                    <button class="w-full bg-gray-100 text-gray-800 py-3 !rounded-button hover:bg-gray-200 transition-all duration-300 whitespace-nowrap">
+                Get Started
+              </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+        <section id="contact" class="py-20 relative overflow-hidden" style="
+        background-image: url('https://readdy.ai/api/search-image?query=Abstract%20digital%20background%20with%20flowing%20gradients%20of%20deep%20purple%2C%20electric%20blue%2C%20and%20rose%20gold.%20The%20design%20features%20subtle%20geometric%20patterns%20and%20a%20mesh-like%20structure%20that%20creates%20depth%20and%20dimension.%20The%20overall%20aesthetic%20is%20modern%2C%20high-tech%2C%20and%20professional%20with%20smooth%20transitions%20between%20colors.%20The%20image%20has%20a%20clean%2C%20minimalist%20style%20suitable%20for%20a%20call-to-action%20section%20background&width=1920&height=600&seq=12352&orientation=landscape');
+        background-size: cover;
+        background-position: center;
+      ">
+            <div class="absolute inset-0 bg-gradient-to-r from-secondary/90 to-primary/80"></div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl font-bold text-white mb-6">
+                        Ready to Transform Your Digital Experience?
+                    </h2>
+                    <p class="text-xl text-white/90 mb-10">
+                        Join thousands of satisfied customers who have elevated their online presence with our innovative solutions.
+                    </p>
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-bold mb-6">Get in Touch</h3>
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2">Name</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label for="email" class="block text-gray-700 mb-2"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                    placeholder="Your email"
+                  />
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="service" class="block text-gray-700 mb-2"
+                  >Service Interested In</label
+                >
+                <div class="relative">
+                  <select
+                    id="service"
+                    class="w-full px-4 py-3 border border-gray-300 rounded appearance-none focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 pr-8"
+                  >
+                    <option value="">Select a service</option>
+                    <option value="web-development">Web Development</option>
+                    <option value="digital-marketing">Digital Marketing</option>
+                    <option value="ui-ux-design">UI/UX Design</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div
+                    class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none"
+                  >
+                    <i class="ri-arrow-down-s-line"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="message" class="block text-gray-700 mb-2"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                  placeholder="Tell us about your project"
+                ></textarea>
+              </div>
+              <div class="mb-6">
+                <label class="custom-checkbox flex items-center">
+                  <input type="checkbox" checked />
+                  <span class="checkmark mr-3"></span>
+                  <span class="text-gray-700"
+                    >I agree to the
+                    <a href="#" class="text-primary">Terms of Service</a> and
+                    <a href="#" class="text-primary">Privacy Policy</a></span
+                  >
+                </label>
+                                </div>
+                                <button type="submit" class="w-full bg-primary text-white py-3 !rounded-button hover:bg-opacity-90 transition-all duration-300 pulse whitespace-nowrap">
+                Send Message
+              </button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <footer class="bg-gray-900 text-white pt-20 pb-10 relative">
+            <div class="wave-divider absolute top-0 left-0 right-0"></div>
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
+                    <div>
+                        <a href="#" class="flex items-center space-x-2 mb-6">
+                            <span class="text-3xl font-['Roboto_Slab'] font-bold text-white">NeuroNexus</span
+              >
+            </a>
+            <p class="text-gray-400 mb-6">
+              We create innovative digital solutions that help businesses thrive
+              in the modern world.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-all duration-300"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-all duration-300"
+              >
+                <i class="ri-twitter-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-all duration-300"
+              >
+                <i class="ri-instagram-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-all duration-300"
+              >
+                <i class="ri-linkedin-fill"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-white/80 hover:text-white transition-colors duration-300"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#features"
+                  class="text-white/80 hover:text-white transition-colors duration-300"
+                  >Features</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-white/80 hover:text-white transition-colors duration-300"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#testimonials"
+                  class="text-white/80 hover:text-white transition-colors duration-300"
+                  >Testimonials</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-white/80 hover:text-white transition-colors duration-300"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-6">Services</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Web Development</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Digital Marketing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >UI/UX Design</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >E-commerce Solutions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors duration-300"
+                  >Mobile App Development</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-6">Subscribe</h4>
+            <p class="text-gray-400 mb-6">
+              Stay updated with our latest news and offers.
+            </p>
+            <form class="mb-6">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  class="w-full px-4 py-3 border-none rounded-l focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-300"
+                  style="background: var(--input-bg)"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary px-4 !rounded-r-button hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap"
+                >
+                  <i class="ri-send-plane-fill"></i>
+                </button>
+              </div>
+            </form>
+            <div>
+              <h4 class="text-xl font-bold mb-4">We Accept</h4>
+              <div class="flex space-x-3">
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-gray-400"
+                >
+                  <i class="ri-visa-fill ri-lg"></i>
+                </div>
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-gray-400"
+                >
+                  <i class="ri-mastercard-fill ri-lg"></i>
+                </div>
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-gray-400"
+                >
+                  <i class="ri-paypal-fill ri-lg"></i>
+                </div>
+                <div
+                  class="w-10 h-10 flex items-center justify-center text-gray-400"
+                >
+                  <i class="ri-apple-fill ri-lg"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-gray-800 text-center">
+          <p class="text-white/80">
+            &copy; 2025 NeuroNexus. All rights reserved. Designed with
+            <i class="ri-heart-fill text-[#FF6B6B]"></i> by our team.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+        });
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("shadow-md");
+            navbar.style.background = "var(--nav-bg)";
+          } else {
+            navbar.classList.remove("shadow-md");
+            navbar.style.background = "transparent";
+          }
+        });
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 100,
+                behavior: "smooth",
+              });
+              if (!mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+              }
+            }
+          });
+        });
+        function animateCounter(elementId, targetValue) {
+          const element = document.getElementById(elementId);
+          const duration = 2000;
+          const frameDuration = 1000 / 60; 
+          const totalFrames = Math.round(duration / frameDuration);
+          let frame = 0;
+          const counter = setInterval(() => {
+            frame++;
+            const progress = frame / totalFrames;
+            const currentValue = Math.round(targetValue * progress);
+            if (frame === totalFrames) {
+              clearInterval(counter);
+            }
+            element.textContent = currentValue.toLocaleString();
+          }, frameDuration);
+        }
+        const statsSection = document
+          .getElementById("stat1")
+          .closest("section");
+        const statsObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateCounter("stat1", 500);
+                animateCounter("stat2", 1200);
+                animateCounter("stat3", 15000);
+                animateCounter("stat4", 25);
+                statsObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        statsObserver.observe(statsSection);
+        const chartDom = document.getElementById("growth-chart");
+        const myChart = echarts.init(chartDom);
+        const option = {
+          animation: false,
+          tooltip: {
+            trigger: "axis",
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            borderColor: "#eee",
+            borderWidth: 1,
+            textStyle: {
+              color: "#1f2937",
+            },
+          },
+          legend: {
+            data: ["Website Traffic", "Conversion Rate"],
+            textStyle: {
+              color: "#1f2937",
+            },
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            top: "15%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data: [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
+            ],
+            axisLine: {
+              lineStyle: {
+                color: "#ddd",
+              },
+            },
+            axisLabel: {
+              color: "#1f2937",
+            },
+          },
+          yAxis: {
+            type: "value",
+            axisLine: {
+              lineStyle: {
+                color: "#ddd",
+              },
+            },
+            axisLabel: {
+              color: "#1f2937",
+            },
+            splitLine: {
+              lineStyle: {
+                color: "#eee",
+              },
+            },
+          },
+          series: [
+            {
+              name: "Website Traffic",
+              type: "line",
+              smooth: true,
+              lineStyle: {
+                width: 3,
+                color: "rgba(26, 54, 93, 1)",
+              },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "rgba(26, 54, 93, 0.3)",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(26, 54, 93, 0.1)",
+                  },
+                ]),
+              },
+              emphasis: {
+                focus: "series",
+              },
+              data: [
+                3000, 3500, 4200, 4800, 5100, 5400, 6000, 6700, 7200, 7800,
+                8400, 9000,
+              ],
+            },
+            {
+              name: "Conversion Rate",
+              type: "line",
+              smooth: true,
+              lineStyle: {
+                width: 3,
+                color: "rgba(141, 211, 199, 1)",
+              },
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "rgba(141, 211, 199, 0.3)",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(141, 211, 199, 0.1)",
+                  },
+                ]),
+              },
+              emphasis: {
+                focus: "series",
+              },
+              data: [
+                1.2, 1.8, 2.2, 2.8, 3.0, 3.5, 3.8, 4.2, 4.5, 4.8, 5.0, 5.5,
+              ].map((val) => val * 100),
+            },
+          ],
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+        const testimonialSlider = document.getElementById("testimonial-slider");
+        const testimonialDots = document.querySelectorAll(".testimonial-dot");
+        testimonialDots.forEach((dot) => {
+          dot.addEventListener("click", function () {
+            const index = this.getAttribute("data-index");
+            const slideWidth =
+              testimonialSlider.querySelector("div").offsetWidth;
+            testimonialSlider.scrollTo({
+              left: slideWidth * index,
+              behavior: "smooth",
+            });
+            testimonialDots.forEach((d) =>
+              d.classList.remove("active", "bg-primary")
+            );
+            this.classList.add("active", "bg-primary");
+          });
+        });
+        testimonialSlider.addEventListener("scroll", function () {
+          const slideWidth = testimonialSlider.querySelector("div").offsetWidth;
+          const scrollPosition = testimonialSlider.scrollLeft;
+          const index = Math.round(scrollPosition / slideWidth);
+          testimonialDots.forEach((d) =>
+            d.classList.remove("active", "bg-primary")
+          );
+          testimonialDots[index].classList.add("active", "bg-primary");
+        });
+        const pricingToggles = document.querySelectorAll(".pricing-toggle");
+        pricingToggles.forEach((toggle) => {
+          toggle.addEventListener("click", function () {
+            const period = this.getAttribute("data-period");
+            pricingToggles.forEach((t) =>
+              t.classList.remove("active", "bg-primary", "text-white")
+            );
+            this.classList.add("active", "bg-primary", "text-white");
+            if (period === "monthly") {
+              document.getElementById("basic-price").textContent = "$29";
+              document.getElementById("pro-price").textContent = "$79";
+              document.getElementById("enterprise-price").textContent = "$199";
+              document.getElementById("basic-period").textContent = "/month";
+              document.getElementById("pro-period").textContent = "/month";
+              document.getElementById("enterprise-period").textContent =
+                "/month";
+            } else {
+              document.getElementById("basic-price").textContent = "$290";
+              document.getElementById("pro-price").textContent = "$790";
+              document.getElementById("enterprise-price").textContent =
+                "$1,990";
+              document.getElementById("basic-period").textContent = "/year";
+              document.getElementById("pro-period").textContent = "/year";
+              document.getElementById("enterprise-period").textContent =
+                "/year";
+            }
+          });
+        });
+        const themeToggle = document.getElementById("theme-toggle");
+        const prefersDarkScheme = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        );
+        function setTheme(isDark) {
+          document.documentElement.setAttribute(
+            "data-theme",
+            isDark ? "dark" : "light"
+          );
+          themeToggle.checked = isDark;
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        }
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          setTheme(savedTheme === "dark");
+        } else {
+          setTheme(prefersDarkScheme.matches);
+        }
+        themeToggle.addEventListener("change", function () {
+          setTheme(this.checked);
+        });
+        prefersDarkScheme.addEventListener("change", (e) => {
+          if (!localStorage.getItem("theme")) {
+            setTheme(e.matches);
+          }
+        });
+        const particlesContainer = document.getElementById("particles");
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
+          const size = Math.random() * 10 + 5;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
+          const colors = [
+            "rgba(0, 102, 255, 0.3)",
+            "rgba(102, 0, 255, 0.3)",
+            "rgba(255, 107, 107, 0.3)",
+          ];
+          particle.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+          particle.style.animationDelay = `${Math.random() * 5}s`;
+          particlesContainer.appendChild(particle);
+        }
+      });
+    </script>
+  </body>
+</html>
